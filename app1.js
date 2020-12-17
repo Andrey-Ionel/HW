@@ -2,15 +2,18 @@
 
 const anyNumber = Number(prompt('Please enter any number:', 0));
 
-const lastNumber = anyNumber % 10;
-const evenOrOddNumber = anyNumber % 2;
-
-if(evenOrOddNumber) {
-    const alertResult = `Your number is not even. 
+if(isNaN(anyNumber)) {
+    alert('Incorrect input');  
+}else {
+    const lastNumber = anyNumber % 10;
+    const evenOrOddNumber = anyNumber % 2;
+    if(evenOrOddNumber) {
+        const alertResult = `Your number is not even.
 The last number is '${lastNumber}'.`;
-    alert(alertResult);
-} else {
+        alert(alertResult);
+    }else {
         const alertResult = `Your number is even. 
 The last number is '${lastNumber}'.`;
-    alert(alertResult);
+        alert(alertResult);
+    };
 };
