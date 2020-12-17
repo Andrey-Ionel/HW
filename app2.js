@@ -7,16 +7,16 @@ const secondNumber = twoDigitNumber % 10;
 
 if(firstNumber > secondNumber) {
 
-    const alertResult = `The first number '${firstNumber}' is greater than the second '${secondNumber}'.`;
+    const alertResult = `The first digit '${firstNumber}' is greater than the second '${secondNumber}'.`;
 
     alert(alertResult);   
 }else if(firstNumber === secondNumber) {
-    const alertResult = `The numbers '${firstNumber}' and '${secondNumber}' are equal.`;
+    const alertResult = `The digits '${firstNumber}' and '${secondNumber}' are equal.`;
 
     alert(alertResult);
 }else {
     
-    const alertResult = `The first number '${firstNumber}' is less than the second '${secondNumber}'.`;
+    const alertResult = `The first digit '${firstNumber}' is less than the second '${secondNumber}'.`;
 
     alert(alertResult);
 };
