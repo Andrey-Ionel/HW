@@ -131,17 +131,12 @@ console.log(resultOfProductPositiveNumbers);
 
 // j. Найти наибольший среди элементов массива, остальные обнулить.
 
-let maximumOfI = 0;
-maximumValue = 0;
 for (let i = 0; i < arrayOfNumbers.length; i++) {
-    if (arrayOfNumbers[i] > maximumValue) {
-        maximumValue = arrayOfNumbers[i];
-        arrayOfNumbers[maximumOfI] = 0;
-        maximumOfI = i;
-    } else {
+    if (arrayOfNumbers[i] !== maximumValue) {
         arrayOfNumbers[i] = 0;
     }
 };
-const resultOfZeroingElements = `The maximum element of the array is '${arrayOfNumbers[maximumOfI]}' and all other elements are zeroed.`;
+
+const resultOfZeroingElements = `The maximum element of the array is '${maximumValue}' and all other elements are zeroed.`;
 console.log(resultOfZeroingElements);
 console.log(arrayOfNumbers);
