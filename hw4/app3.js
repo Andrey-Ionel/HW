@@ -7,7 +7,7 @@ if (isNaN(anyNumber)) {
 } else {
     let powerNumber = '';
 
-    for (i = 1; i * i <= anyNumber; i++) {
+    for (let i = 1; i * i <= anyNumber; i++) {
         powerNumber = `The square of the number '${i}' = '${i * i}' that does not exceed the entered number '${anyNumber}'.`;
         console.log(powerNumber);
         if (i === 100) {

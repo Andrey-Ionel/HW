@@ -2,7 +2,7 @@
 
 let numberStep = '';
 
-for (i = 20; i <= 30; i++) {
+for (let i = 20; i <= 30; i++) {
     if (i === 30) {
         numberStep += i;
     }
