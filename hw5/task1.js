@@ -4,8 +4,7 @@
 // По мере изменений, выводить содержимое массива на страницу.
 
 const arrayOfValue = [];
-let lenghtOfArray = arrayOfValue.length;
-lenghtOfArray = parseInt(prompt('Please enter the lenght of the array from 1 to 20.', 1));
+const lenghtOfArray = parseInt(prompt('Please enter the lenght of the array from 1 to 20.', 1));
 
 if (isNaN(lenghtOfArray)) {
     alert('Incorrect input');
@@ -18,8 +17,8 @@ if (isNaN(lenghtOfArray)) {
         const lenghtResult = `The lenght of the array is '${lenghtOfArray}'.`
         console.log(lenghtResult);
         const falResulte = `The lenght of the array is '0'.`
-        for (i = 0; i < lenghtOfArray; i++) {
-            arrayOfValue[i] = String(prompt('Please enter array value ' + (i + 1)));
+        for (let i = 0; i < lenghtOfArray; i++) {
+            arrayOfValue[i] = prompt('Please enter array value ' + (i + 1));
             if (arrayOfValue[i] === '' || arrayOfValue[i] === ' ') {
                 alert('Incorrect input');
                 arrayOfValue.splice(0, lenghtOfArray);
