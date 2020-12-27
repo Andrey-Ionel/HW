@@ -6,15 +6,15 @@ const anyNumber = parseInt(prompt('Please enter any number:', 0));
 if (isNaN(anyNumber)) {
     alert('Incorrect input');
 } else {
-    let powerNumber = '';
 
-    for (let i = 1; Math.pow(3, i); i++) {
-        if (Math.pow(3, i) === anyNumber) {
-            powerNumber = `When raising (3^i), you can get '${anyNumber}'.`;
+    for (let i = 1; i < anyNumber; i++) {
+        const powerThree = Math.pow(3, i);
+        if (powerThree === anyNumber) {
+            const powerNumber = `When raising (3^i), you can get '${anyNumber}'.`;
             alert(powerNumber);
             break;
-        } else if (Math.pow(3, i) > anyNumber && Math.pow(3, i) !== anyNumber) {
-            powerNumber = `When raising (3^i), you can not get '${anyNumber}'.`;
+        } else if (powerThree > anyNumber) {
+            const powerNumber = `When raising (3^i), you can not get '${anyNumber}'.`;
             alert(powerNumber);
             break;
         };
