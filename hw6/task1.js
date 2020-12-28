@@ -56,7 +56,6 @@ if (chackIfCanceledOperation()) {
         } else if (mathOperation === '*') {
             const multiplicationOfOperation = filteredArrayOfNumber.reduce((acc, value) => acc * value);
             return multiplicationOfOperation;
-
         }
     };
     function createresultLog() {
