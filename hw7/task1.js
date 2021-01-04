@@ -45,10 +45,10 @@ const sumOfMark = students.reduce((sum, student) => {
 
 const averageMarkOfAll = (sumOfMark / students.length).toFixed(2);
 
-function createaverageMarkLog() {
+function createAverageMarkLog() {
     const resultAverageMark = `Average mark of all students ${averageMarkOfAll}`;
     console.log('---------------------------------');
     console.log(resultAverageMark);
 };
 
-createaverageMarkLog();
+createAverageMarkLog();
