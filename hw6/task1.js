@@ -12,7 +12,7 @@
 
 // Для этого у массива есть специальный метод который позволяет убрать ненужные значения.
 
-const mathOperation = prompt('Please, enter math operation');
+const mathOperation = prompt('Please, enter math operation.');
 
 if (chackIfCanceledOperation()) {
     alert('Cancel input');
@@ -21,51 +21,19 @@ if (chackIfCanceledOperation()) {
 } else {
     createOperationLog();
 
-    const arrayOfNumber = createArrayOfNumbers();
+    const enterNumbers = prompt('Please enter numbers separated by a space.');
 
-    const filteredArrayOfNumber = arrayOfNumber.filter(function (item, index, array) {
-        if (item === '') {
-            return false;
-        } else if (isNaN(item)) {
-            return false;
+    if (chackIfCanceledArrayCreation(enterNumbers)) {
+    } else {
+        createArrayOfNumbers(enterNumbers);
+        createFilteredArrayOfNumbers(enterNumbers);
+        if (chackIfFilteredArray(enterNumbers)) {
         } else {
-            return true;
+            createFilteredArrayLog(enterNumbers);
+            createResultLog(enterNumbers);
         }
-    });
-
-    function createFilteredArrayLog() {
-        filteredArrayOfNumber === true;
-        console.log(`Your array of numbers is [${filteredArrayOfNumber}].`);
-        return true;
-    };
-    createFilteredArrayLog();
-
-    performsArrayOperations();
-
-    function performsArrayOperations() {
-
-        if (mathOperation === '+') {
-            const sumOfOperation = filteredArrayOfNumber.reduce((acc, value) => parseInt(acc) + parseInt(value));
-            return sumOfOperation;
-        } else if (mathOperation === '-') {
-            const minustOfOperation = filteredArrayOfNumber.reduce((acc, value) => acc - value);
-            return minustOfOperation;
-        } else if (mathOperation === '/') {
-            const divisionOfOperation = filteredArrayOfNumber.reduce((acc, value) => acc / value);
-            return divisionOfOperation;
-        } else if (mathOperation === '*') {
-            const multiplicationOfOperation = filteredArrayOfNumber.reduce((acc, value) => acc * value);
-            return multiplicationOfOperation;
-        }
-    };
-    function createresultLog() {
-        performsArrayOperations() === true;
-        console.log(`The result of your operation is ${performsArrayOperations()}.`);
-        return true;
-    };
-    createresultLog();
+    }
 };
-
 
 function chackIfCanceledOperation() {
     if (mathOperation === null) {
@@ -79,20 +47,65 @@ function checkCorrectInput() {
     };
 };
 
-
 function createOperationLog() {
-    mathOperation === true;
     console.log(`Your operation is (${mathOperation}).`);
-    return true;
 };
 
-function createArrayOfNumbers() {
-    const enterNumbers = prompt('Please enter numbers separated by a space');
+function chackIfCanceledArrayCreation(enterNumbers) {
     if (enterNumbers === null) {
         alert('Cancel input');
+        console.log('Please refresh your browser and try again.');
         return true;
-    } else {
+    }
+};
+function createArrayOfNumbers(enterNumbers) {
+    if (enterNumbers !== null) {
         const arrayOfNumber = enterNumbers.split(' ');
         return arrayOfNumber;
     }
+};
+
+function createFilteredArrayOfNumbers(enterNumbers) {
+    const filteredArrayOfNumbers = createArrayOfNumbers(enterNumbers).filter(function (item) {
+        if (item === '') {
+            return false;
+        } else if (isNaN(item)) {
+            return false;
+        } else {
+            return true;
+        }
+    })
+    return filteredArrayOfNumbers;
+};
+
+function chackIfFilteredArray(enterNumbers) {
+    if (createFilteredArrayOfNumbers(enterNumbers).length === 0) {
+        alert('Incorrect input no numbers to perform the operation.');
+        console.log('Please refresh your browser and try again.');
+        return true;
+    }
+};
+
+function createFilteredArrayLog(enterNumbers) {
+    console.log(`Your array of numbers is [${createFilteredArrayOfNumbers(enterNumbers)}].`);
+};
+
+function performsArrayOperations(enterNumbers) {
+    if (mathOperation === '+') {
+        const sumOfOperation = createFilteredArrayOfNumbers(enterNumbers).reduce((acc, value) => parseInt(acc) + parseInt(value));
+        return sumOfOperation;
+    } else if (mathOperation === '-') {
+        const minustOfOperation = createFilteredArrayOfNumbers(enterNumbers).reduce((acc, value) => acc - value);
+        return minustOfOperation;
+    } else if (mathOperation === '/') {
+        const divisionOfOperation = createFilteredArrayOfNumbers(enterNumbers).reduce((acc, value) => acc / value);
+        return divisionOfOperation;
+    } else if (mathOperation === '*') {
+        const multiplicationOfOperation = createFilteredArrayOfNumbers(enterNumbers).reduce((acc, value) => acc * value);
+        return multiplicationOfOperation;
+    }
+};
+
+function createResultLog(enterNumbers) {
+    console.log(`The result of your operation is ${performsArrayOperations(enterNumbers)}.`);
 };
