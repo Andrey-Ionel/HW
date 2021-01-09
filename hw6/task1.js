@@ -67,6 +67,7 @@ function createArrayOfNumbers(enterNumbers) {
 };
 
 function createFilteredArrayOfNumbers(enterNumbers) {
+
     const filteredArrayOfNumbers = createArrayOfNumbers(enterNumbers).filter(function (item) {
         if (item === '') {
             return false;
@@ -76,6 +77,7 @@ function createFilteredArrayOfNumbers(enterNumbers) {
             return true;
         }
     })
+
     return filteredArrayOfNumbers;
 };
 
