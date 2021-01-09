@@ -20,18 +20,19 @@ if (chackIfCanceledOperation()) {
     alert('Incorrect input');
 } else {
     createOperationLog();
-
     const enterNumbers = prompt('Please enter numbers separated by a space.');
 
     if (chackIfCanceledArrayCreation(enterNumbers)) {
     } else {
         createArrayOfNumbers(enterNumbers);
         createFilteredArrayOfNumbers(enterNumbers);
+
         if (chackIfFilteredArray(enterNumbers)) {
         } else {
             createFilteredArrayLog(enterNumbers);
             createResultLog(enterNumbers);
         }
+
     }
 };
 
