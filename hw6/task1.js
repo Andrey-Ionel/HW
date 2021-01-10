@@ -27,7 +27,7 @@ if (chackIfCanceledOperation()) {
         createArrayOfNumbers(enterNumbers);
         createFilteredArrayOfNumbers(enterNumbers);
 
-        if (chackIfFilteredArray(enterNumbers)) {
+        if (checkIfFilteredArray(enterNumbers)) {
         } else {
             createFilteredArrayLog(enterNumbers);
             createResultLog(enterNumbers);
@@ -81,7 +81,7 @@ function createFilteredArrayOfNumbers(enterNumbers) {
     return filteredArrayOfNumbers;
 };
 
-function chackIfFilteredArray(enterNumbers) {
+function checkIfFilteredArray(enterNumbers) {
     if (createFilteredArrayOfNumbers(enterNumbers).length === 0) {
         alert('Incorrect input no numbers to perform the operation.');
         console.log('Please refresh your browser and try again.');
