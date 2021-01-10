@@ -14,7 +14,7 @@
 
 const mathOperation = prompt('Please, enter math operation.');
 
-if (chackIfCanceledOperation()) {
+if (checkIfCanceledOperation()) {
     alert('Cancel input');
 } else if (checkCorrectInput()) {
     alert('Incorrect input');
@@ -22,7 +22,7 @@ if (chackIfCanceledOperation()) {
     createOperationLog();
     const enterNumbers = prompt('Please enter numbers separated by a space.');
 
-    if (chackIfCanceledArrayCreation(enterNumbers)) {
+    if (checkIfCanceledArrayCreation(enterNumbers)) {
     } else {
         createArrayOfNumbers(enterNumbers);
         createFilteredArrayOfNumbers(enterNumbers);
@@ -36,7 +36,7 @@ if (chackIfCanceledOperation()) {
     }
 };
 
-function chackIfCanceledOperation() {
+function checkIfCanceledOperation() {
     if (mathOperation === null) {
         return true;
     }
@@ -52,7 +52,7 @@ function createOperationLog() {
     console.log(`Your operation is (${mathOperation}).`);
 };
 
-function chackIfCanceledArrayCreation(enterNumbers) {
+function checkIfCanceledArrayCreation(enterNumbers) {
     if (enterNumbers === null) {
         alert('Cancel input');
         console.log('Please refresh your browser and try again.');
