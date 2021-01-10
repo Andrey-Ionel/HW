@@ -49,6 +49,6 @@ function createAverageMarkLog() {
     const resultAverageMark = `Average mark of all students ${getAverageMarkOfAll(students)}`;
     console.log('---------------------------------');
     console.log(resultAverageMark);
-};
+}
 
 createAverageMarkLog();
