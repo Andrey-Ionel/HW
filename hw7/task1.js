@@ -21,32 +21,32 @@ const students = [
 
 // первая выведет список студентов и средний бал каждого
 
-const averageMarks = (student) => {
+const getAverageMark = (student) => {
     return student.marks.reduce((a, b) => a + b) / student.marks.length;
-};
+}
 
-function createHeaderLog() {
+function printStudentsMarks() {
     console.log('---------------------------------');
     console.log('Students and their average marks:');
     console.log('---------------------------------');
-};
+    for (const student of students) {
+        console.log(`${student.name}: ${getAverageMark(student)}`);
+    }
+}
 
-createHeaderLog();
-
-for (const student of students) {
-    console.log(`${student.name}: ${averageMarks(student)}`);
-};
+printStudentsMarks();
 
 // вторая выведен средний бал по всем студентам
 
-const sumOfMark = students.reduce((sum, student) => {
-    return sum + averageMarks(student);
-}, 0);
-
-const averageMarkOfAll = (sumOfMark / students.length).toFixed(2);
+const getAverageMarkOfAll = (students) => {
+    const sumOfMark = students.reduce((sum, student) => {
+        return sum + getAverageMark(student);
+    }, 0);
+    return (sumOfMark / students.length).toFixed(2);
+}
 
 function createAverageMarkLog() {
-    const resultAverageMark = `Average mark of all students ${averageMarkOfAll}`;
+    const resultAverageMark = `Average mark of all students ${getAverageMarkOfAll(students)}`;
     console.log('---------------------------------');
     console.log(resultAverageMark);
 };
