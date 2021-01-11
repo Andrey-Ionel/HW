@@ -16,18 +16,21 @@ const mathOperation = prompt('Please, enter math operation.');
 
 if (checkIfCanceledOperation()) {
     alert('Cancel input');
-} else if (checkCorrectInput()) {
+} else if (checkIncorrectInput()) {
     alert('Incorrect input');
 } else {
     createOperationLog();
     const enterNumbers = prompt('Please enter numbers separated by a space.');
 
     if (checkIfCanceledArrayCreation(enterNumbers)) {
+        alert('Cancel input');
+        console.log('Please refresh your browser and try again.');
     } else {
-        createArrayOfNumbers(enterNumbers);
         createFilteredArrayOfNumbers(enterNumbers);
 
-        if (checkIfFilteredArray(enterNumbers)) {
+        if (checkIfFilteredArrayEmpty(enterNumbers)) {
+            alert('Incorrect input no numbers to perform the operation.');
+            console.log('Please refresh your browser and try again.');
         } else {
             createFilteredArrayLog(enterNumbers);
             createResultLog(enterNumbers);
@@ -42,7 +45,7 @@ function checkIfCanceledOperation() {
     }
 };
 
-function checkCorrectInput() {
+function checkIncorrectInput() {
     if (mathOperation !== '+' && mathOperation !== '-' && mathOperation !== '*' && mathOperation !== '/') {
         return true;
     };
@@ -54,8 +57,6 @@ function createOperationLog() {
 
 function checkIfCanceledArrayCreation(enterNumbers) {
     if (enterNumbers === null) {
-        alert('Cancel input');
-        console.log('Please refresh your browser and try again.');
         return true;
     }
 };
@@ -81,10 +82,8 @@ function createFilteredArrayOfNumbers(enterNumbers) {
     return filteredArrayOfNumbers;
 };
 
-function checkIfFilteredArray(enterNumbers) {
+function checkIfFilteredArrayEmpty(enterNumbers) {
     if (createFilteredArrayOfNumbers(enterNumbers).length === 0) {
-        alert('Incorrect input no numbers to perform the operation.');
-        console.log('Please refresh your browser and try again.');
         return true;
     }
 };
