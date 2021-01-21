@@ -8,73 +8,68 @@
 
 // Для реализации обязательно попробуйте использовать делегирование и интересные подходы из статей.
 
-function onCreateTodoListApplication() {
+const addListButton = document.querySelector('.js-add-todo');
+const inputForAddList = document.querySelector('.js-todo-name');
+const locationForAddList = document.querySelector('.js-todo-list');
+const emptyListMessage = document.querySelector('.js-hidden-text');
+const formWithTodoElements = document.querySelector('.js-todo-form');
 
-    const addListButton = document.querySelector('.js-add-todo');
-    const inputForAddList = document.querySelector('.js-todo-name');
-    const locationForAddList = document.querySelector('.js-todo-list');
-    const emptyListMessage = document.querySelector('.js-hidden-text');
-    const formWithTodoElements = document.querySelector('.js-todo-form');
+addListButton.addEventListener('click', onCreateNewTodoList);
+locationForAddList.addEventListener('click', onRemoveTodoList);
+locationForAddList.addEventListener('click', onChangeColorTodoList);
+formWithTodoElements.addEventListener('keypress', onDisableEnterKey);
 
-    addListButton.addEventListener('click', onCreateNewTodoList);
-    locationForAddList.addEventListener('click', onRemoveTodoList);
-    locationForAddList.addEventListener('click', onChangeColorTodoList);
-    formWithTodoElements.addEventListener('keypress', onDisableEnterKey);
+function onDisableEnterKey(event) {
 
-    function onDisableEnterKey(event) {
-
-        if (event.keyCode === 13) {
-            event.preventDefault();
-        }
-
+    if (event.keyCode === 13) {
+        event.preventDefault();
     }
 
-    function onCreateNewTodoList() {
-        const currentInputValue = inputForAddList.value;
-
-        if (currentInputValue === '' || currentInputValue === ' ') {
-            alert('Your input is empty');
-        } else {
-
-            locationForAddList.insertAdjacentHTML('beforeend', `<li class="list-group-item list-group-item-warning my-1">${currentInputValue}<i class="bi bi-x-square mx-3"></i></li>`);
-            const initialInputValue = (inputForAddList.value = '');
-            changeVisibilityEmptyListMessage();
-            return initialInputValue;
-        }
-
-    }
-
-    function onChangeColorTodoList(event) {
-        const todoListElementTarget = event.target.classList.contains('list-group-item');
-        const todoListElement = event.target.closest('li');
-
-        if (todoListElementTarget) {
-            todoListElement.classList.toggle('list-group-item-warning');
-            todoListElement.classList.toggle('list-group-item-success');
-        }
-
-    }
-
-    function onRemoveTodoList(event) {
-        const todoCloseButton = event.target.classList.contains('bi-x-square');
-        const todoListElement = event.target.closest('li');
-
-        if (todoCloseButton) {
-            todoListElement.remove();
-            changeVisibilityEmptyListMessage()
-        }
-
-    }
-
-    function changeVisibilityEmptyListMessage() {
-
-        if (locationForAddList.children.length >= 1) {
-            emptyListMessage.hidden = true;
-        } else {
-            emptyListMessage.hidden = false;
-        }
-
-    }
 }
 
-onCreateTodoListApplication();
+function onCreateNewTodoList() {
+    const currentInputValue = inputForAddList.value;
+
+    if (currentInputValue === '' || currentInputValue === ' ') {
+        alert('Your input is empty');
+    } else {
+
+        locationForAddList.insertAdjacentHTML('beforeend', `<li class="list-group-item list-group-item-warning my-1">${currentInputValue}<i class="bi bi-x-square mx-3"></i></li>`);
+        const initialInputValue = (inputForAddList.value = '');
+        changeVisibilityEmptyListMessage();
+        return initialInputValue;
+    }
+
+}
+
+function onChangeColorTodoList(event) {
+    const todoListElementTarget = event.target.classList.contains('list-group-item');
+    const todoListElement = event.target.closest('li');
+
+    if (todoListElementTarget) {
+        todoListElement.classList.toggle('list-group-item-warning');
+        todoListElement.classList.toggle('list-group-item-success');
+    }
+
+}
+
+function onRemoveTodoList(event) {
+    const todoCloseButton = event.target.classList.contains('bi-x-square');
+    const todoListElement = event.target.closest('li');
+
+    if (todoCloseButton) {
+        todoListElement.remove();
+        changeVisibilityEmptyListMessage()
+    }
+
+}
+
+function changeVisibilityEmptyListMessage() {
+
+    if (locationForAddList.children.length >= 1) {
+        emptyListMessage.hidden = true;
+    } else {
+        emptyListMessage.hidden = false;
+    }
+
+}
