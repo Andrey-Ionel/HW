@@ -26,12 +26,12 @@ function onAddButtonClick() {
     }
 
     function createNewList() {
-
-        if (getInputValue() === '' || getInputValue() === ' ') {
+        const currentInputValue = getInputValue();
+        if (currentInputValue === '' || currentInputValue === ' ') {
             alert('Your input is empty');
         } else {
             emptyListMessage.hidden = true;
-            locationForAddList.insertAdjacentHTML('beforeend', `<li class="list-group-item">${getInputValue()}</li>`);
+            locationForAddList.insertAdjacentHTML('beforeend', `<li class="list-group-item">${currentInputValue}</li>`);
             return clearsInputValue();
         }
 
