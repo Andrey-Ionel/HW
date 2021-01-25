@@ -1,6 +1,6 @@
 // Написать функцию createCalculator, чтобы ее можно было использовать таким образом
 
-// const calc = createCalculator(10);
+// const ca lc = createCalculator(10);
 
 // calc.sum(5); /// 15
 // calc.mult(10); // 150
@@ -8,34 +8,20 @@
 // calc.div(10); // 11
 // calc.set(100); // 100
 
-function createCalculator(calculator) {
-    let valueOfCalculator = parseFloat(calculator);
-    console.log(valueOfCalculator);
+function createCalculator(initialValue) {
+    let valueOfCalculator = parseFloat(initialValue);
 
-    function calculateSumOfNumbers(sum) {
-        valueOfCalculator += parseFloat(sum);
-        console.log(valueOfCalculator);
-    }
+    const calculateSumOfNumbers = (sum) => valueOfCalculator += parseFloat(sum);
 
-    function calculateMultiplicationOfNumbers(multiplication) {
-        valueOfCalculator *= parseFloat(multiplication);
-        console.log(valueOfCalculator);
-    }
+    const calculateMultiplicationOfNumbers = (multiplication) => valueOfCalculator *= parseFloat(multiplication);
 
-    function calculateSubtractionOfNumbers(subtraction) {
-        valueOfCalculator -= parseFloat(subtraction);
-        console.log(valueOfCalculator);
-    }
+    const calculateSubtractionOfNumbers = (subtraction) => valueOfCalculator -= parseFloat(subtraction);
 
-    function calculateDivisionOfNumbers(division) {
-        valueOfCalculator /= parseFloat(division);
-        console.log(valueOfCalculator);
-    }
+    const calculateDivisionOfNumbers = (division) => valueOfCalculator /= parseFloat(division);
 
-    function setAnyNumericValue(setValue) {
-        valueOfCalculator = parseFloat(setValue);
-        console.log(valueOfCalculator);
-    }
+    const setAnyNumericValue = (setValue) => valueOfCalculator = parseFloat(setValue);
+
+    const showCalculatorLog = () => console.log(valueOfCalculator);
 
     return {
         calculateSumOfNumbers,
@@ -43,5 +29,6 @@ function createCalculator(calculator) {
         calculateSubtractionOfNumbers,
         calculateDivisionOfNumbers,
         setAnyNumericValue,
+        showCalculatorLog
     }
 }
