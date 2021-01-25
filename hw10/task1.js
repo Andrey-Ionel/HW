@@ -10,13 +10,13 @@
 
 const addListButton = document.querySelector('.js-add-todo');
 const inputForAddList = document.querySelector('.js-todo-name');
-const locationForAddList = document.querySelector('.js-todo-list');
+const todoList = document.querySelector('.js-todo-list');
 const emptyListMessage = document.querySelector('.js-hidden-text');
 const formWithTodoElements = document.querySelector('.js-todo-form');
 
 addListButton.addEventListener('click', onCreateNewTodoList);
-locationForAddList.addEventListener('click', onRemoveTodoList);
-locationForAddList.addEventListener('click', onChangeColorTodoList);
+todoList.addEventListener('click', onRemoveTodoList);
+todoList.addEventListener('click', onChangeColorTodoList);
 formWithTodoElements.addEventListener('keypress', onDisableEnterKey);
 
 function onDisableEnterKey(event) {
@@ -29,14 +29,14 @@ function onDisableEnterKey(event) {
 
 function onCreateNewTodoList() {
     const currentInputValue = inputForAddList.value;
+    const initialInputValue = (inputForAddList.value = '');
 
-    if (currentInputValue === '' || currentInputValue === ' ') {
-        alert('Your input is empty');
-    } else {
-
-        locationForAddList.insertAdjacentHTML('beforeend', `<li class="list-group-item list-group-item-warning my-1">${currentInputValue}<i class="bi bi-x-square mx-3"></i></li>`);
-        const initialInputValue = (inputForAddList.value = '');
+    if (currentInputValue && currentInputValue.trim().length) {
+        todoList.insertAdjacentHTML('beforeend', `<li class="list-group-item list-group-item-warning my-1">${currentInputValue}<i class="bi bi-x-square mx-3"></i></li>`);
         changeVisibilityEmptyListMessage();
+        return initialInputValue;
+    } else {
+        alert('Your input is empty');
         return initialInputValue;
     }
 
@@ -66,7 +66,7 @@ function onRemoveTodoList(event) {
 
 function changeVisibilityEmptyListMessage() {
 
-    if (locationForAddList.children.length >= 1) {
+    if (todoList.children.length >= 1) {
         emptyListMessage.hidden = true;
     } else {
         emptyListMessage.hidden = false;
