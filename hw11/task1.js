@@ -21,7 +21,7 @@ function createCalculator(initialValue) {
 
     const setAnyNumericValue = (setValue) => valueOfCalculator = parseFloat(setValue);
 
-    const showCalculatorLog = () => console.log(valueOfCalculator);
+    const showCalculatorValueLog = () => console.log(valueOfCalculator);
 
     return {
         calculateSumOfNumbers,
@@ -29,6 +29,6 @@ function createCalculator(initialValue) {
         calculateSubtractionOfNumbers,
         calculateDivisionOfNumbers,
         setAnyNumericValue,
-        showCalculatorLog
+        showCalculatorValueLog
     }
 }
