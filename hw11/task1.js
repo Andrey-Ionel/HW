@@ -1,6 +1,6 @@
 // Написать функцию createCalculator, чтобы ее можно было использовать таким образом
 
-// const ca lc = createCalculator(10);
+// const calc = createCalculator(10);
 
 // calc.sum(5); /// 15
 // calc.mult(10); // 150
