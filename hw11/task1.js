@@ -9,32 +9,32 @@
 // calc.set(100); // 100
 
 function createCalculator(calculator) {
-    let ValueOfCalculator = parseFloat(calculator);
-    console.log(ValueOfCalculator);
+    let valueOfCalculator = parseFloat(calculator);
+    console.log(valueOfCalculator);
 
     function calculateSumOfNumbers(sum) {
-        ValueOfCalculator += parseFloat(sum);
-        console.log(ValueOfCalculator);
+        valueOfCalculator += parseFloat(sum);
+        console.log(valueOfCalculator);
     }
 
     function calculateMultiplicationOfNumbers(multiplication) {
-        ValueOfCalculator *= parseFloat(multiplication);
-        console.log(ValueOfCalculator);
+        valueOfCalculator *= parseFloat(multiplication);
+        console.log(valueOfCalculator);
     }
 
     function calculateSubtractionOfNumbers(subtraction) {
-        ValueOfCalculator -= parseFloat(subtraction);
-        console.log(ValueOfCalculator);
+        valueOfCalculator -= parseFloat(subtraction);
+        console.log(valueOfCalculator);
     }
 
     function calculateDivisionOfNumbers(division) {
-        ValueOfCalculator /= parseFloat(division);
-        console.log(ValueOfCalculator);
+        valueOfCalculator /= parseFloat(division);
+        console.log(valueOfCalculator);
     }
 
     function setAnyNumericValue(setValue) {
-        ValueOfCalculator = parseFloat(setValue);
-        console.log(ValueOfCalculator);
+        valueOfCalculator = parseFloat(setValue);
+        console.log(valueOfCalculator);
     }
 
     return {
