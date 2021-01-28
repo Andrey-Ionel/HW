@@ -39,7 +39,6 @@ let hamburgerPrice = 0;
 let hamburgerCallories = 0;
 
 function Hamburger(hamburgerSize) {
-    this.size = hamburgerSize;
 
     this.getPrice = function () {
         switch (hamburgerSize) {
