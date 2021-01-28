@@ -27,7 +27,7 @@
 // console.log("Callories with sauce: “ + hamburger.getCallories());
 
 const SIZE_SMALL = 'SIZE_SMALL';
-const SIZE_MIDDLE = 'SIZE_MIDDLE';
+const SIZE_MEDIUM = 'SIZE_MEDIUM';
 const SIZE_BIG = 'SIZE_BIG';
 const TOPPING_CHEESE = 'TOPPING_CHEESE';
 const TOPPING_SALAD = 'TOPPING_SALAD';
@@ -46,7 +46,7 @@ function Hamburger(hamburgerSize) {
             case SIZE_SMALL:
                 hamburgerPrice += 50;
                 break;
-            case SIZE_MIDDLE:
+            case SIZE_MEDIUM:
                 hamburgerPrice += 75;
                 break;
             case SIZE_BIG:
@@ -61,7 +61,7 @@ function Hamburger(hamburgerSize) {
             case SIZE_SMALL:
                 hamburgerCallories += 20;
                 break;
-            case SIZE_MIDDLE:
+            case SIZE_MEDIUM:
                 hamburgerCallories += 30;
                 break;
             case SIZE_BIG:
