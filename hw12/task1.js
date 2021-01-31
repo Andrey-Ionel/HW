@@ -23,76 +23,59 @@
 // hamburger.addTopping(TOPPING_MAYO);
 // hamburger.addTopping(TOPPING_POTATO);
 
-// console.log("Price with sauce: “ + hamburger.getPrice());
-// console.log("Callories with sauce: “ + hamburger.getCallories());
+// console.log("Price with sauce: " + hamburger.getPrice());
+// console.log("Callories with sauce: " + hamburger.getCallories());
 
-const SIZE_SMALL = 'SIZE_SMALL';
-const SIZE_MEDIUM = 'SIZE_MEDIUM';
-const SIZE_BIG = 'SIZE_BIG';
-const TOPPING_CHEESE = 'TOPPING_CHEESE';
-const TOPPING_SALAD = 'TOPPING_SALAD';
-const TOPPING_POTATO = 'TOPPING_POTATO';
-const TOPPING_FLAVORING = 'TOPPING_FLAVORING';
-const TOPPING_MAYO = 'TOPPING_MAYO';
+const SIZE_SMALL = {
+    hamburgerCallories: 20,
+    hamburgerPrice: 50
+};
+const SIZE_MEDIUM = {
+    hamburgerCallories: 30,
+    hamburgerPrice: 75
+};
+const SIZE_BIG = {
+    hamburgerCallories: 40,
+    hamburgerPrice: 100
+};
+const TOPPING_CHEESE = {
+    hamburgerCallories: 20,
+    hamburgerPrice: 10
+};
+const TOPPING_SALAD = {
+    hamburgerCallories: 5,
+    hamburgerPrice: 20
+};
+const TOPPING_POTATO = {
+    hamburgerCallories: 10,
+    hamburgerPrice: 15
+};
+const TOPPING_FLAVORING = {
+    hamburgerCallories: 0,
+    hamburgerPrice: 15
+};
+const TOPPING_MAYO = {
+    hamburgerCallories: 5,
+    hamburgerPrice: 20
+};
 
 let hamburgerPrice = 0;
 let hamburgerCallories = 0;
 
 function Hamburger(hamburgerSize) {
 
-    this.getPrice = function () {
-        switch (hamburgerSize) {
-            case SIZE_SMALL:
-                hamburgerPrice += 50;
-                break;
-            case SIZE_MEDIUM:
-                hamburgerPrice += 75;
-                break;
-            case SIZE_BIG:
-                hamburgerPrice += 100;
-                break;
-        }
+    this.getPrice = () => {
+        hamburgerPrice += hamburgerSize.hamburgerPrice;
         return hamburgerPrice;
     }
 
-    this.getCallories = function () {
-        switch (hamburgerSize) {
-            case SIZE_SMALL:
-                hamburgerCallories += 20;
-                break;
-            case SIZE_MEDIUM:
-                hamburgerCallories += 30;
-                break;
-            case SIZE_BIG:
-                hamburgerCallories += 40;
-                break;
-        }
+    this.getCallories = () => {
+        hamburgerCallories += hamburgerSize.hamburgerCallories;
         return hamburgerCallories;
     }
 
-    this.addTopping = function (toppingType) {
-        switch (toppingType) {
-            case TOPPING_CHEESE:
-                hamburgerPrice += 10;
-                hamburgerCallories += 20;
-                break;
-            case TOPPING_SALAD:
-            case TOPPING_MAYO:
-                hamburgerPrice += 20;
-                hamburgerCallories += 5;
-                break;
-            case TOPPING_POTATO:
-                hamburgerPrice += 15;
-                hamburgerCallories += 10;
-                break;
-            case TOPPING_FLAVORING:
-                hamburgerPrice += 15;
-                hamburgerCallories += 0;
-                break;
-        }
-        return {
-            hamburgerPrice,
-            hamburgerCallories
-        }
+    this.addTopping = (topping) => {
+        hamburgerPrice += topping.hamburgerPrice;
+        hamburgerCallories += topping.hamburgerCallories;
     }
 }
