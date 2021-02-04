@@ -16,6 +16,7 @@
     border: 2px solid rgba(178, 187, 238, 0.4);
     background-color:  rgba(178, 187, 238, 0.4);
     box-shadow: 0 0 4px 5px rgba(178, 187, 238, 0.5);
+    z-index: 1;
 }
 .title.accordion-active::after {
     content: "";
@@ -31,4 +32,21 @@
 }
 .body{
     padding: 10px;
+    animation-name: open;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-out;
 }
+@keyframes open {
+    0% {
+      display: block;
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(0, -35%);
+    }
+    100% {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translate(0, 0);
+    }
+  }
