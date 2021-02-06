@@ -33,7 +33,7 @@ class Accordion {
             if (!event.target.classList.contains('title')) {
                 event.preventDefault();
             } else {
-                const eventTargetHeading = event.target.classList;
+                const eventTargetHeading = event.target;
                 this.setActiveTitle(eventTargetHeading);
 
                 const eventTargetBody = event.target.nextElementSibling;
@@ -44,14 +44,14 @@ class Accordion {
 
     setActiveTitle(heading) {
 
-        if (heading.contains('accordion-active')) {
-            heading.remove('accordion-active');
+        if (heading.classList.contains('accordion-active')) {
+            heading.classList.remove('accordion-active');
         } else {
             this.headings.forEach((title) => {
                 title.classList.remove('accordion-active');
             });
 
-            heading.add('accordion-active');
+            heading.classList.add('accordion-active');
         }
 
     }
