@@ -18,10 +18,8 @@ class Accordion {
     }
 
     init() {
-        const accordionHeadings = this.list.querySelectorAll('.title');
-        const accordionBodyContent = this.list.querySelectorAll('.body');
-        this.headings = accordionHeadings;
-        this.bodyContent = accordionBodyContent;
+        this.headings = this.list.querySelectorAll('.title');
+        this.bodyContent = this.list.querySelectorAll('.body');
 
         this.bodyContent.forEach((body) => {
             body.hidden = true;
@@ -30,15 +28,14 @@ class Accordion {
 
     createEventListener() {
         this.list.addEventListener("click", (event) => {
-            if (!event.target.classList.contains('title')) {
-                event.preventDefault();
-            } else {
+            if (event.target.classList.contains('title')) {
                 const eventTargetHeading = event.target;
                 this.setActiveTitle(eventTargetHeading);
 
                 const eventTargetBody = event.target.nextElementSibling;
                 this.showAndHideContent(eventTargetBody);
             }
+
         });
     }
 
