@@ -11,7 +11,7 @@ const albumList = document.querySelector('.js-album-list');
 const albumPhotoForList = document.querySelector('.js-photo-container');
 
 init();
-createPhotoEventListener()
+createPhotoEventListener();
 
 function init() {
     const promiseAlbumList = sendGetAlbumListRequest();
@@ -49,7 +49,7 @@ function sendGetAlbumListRequest() {
 function renderAlbumlist(albumLists) {
     albumLists.map((list) => {
         const albumListItem = document.createElement('li');
-        albumListItem.className = 'album-list-item'
+        albumListItem.className = 'album-list-item';
         albumListItem.append(document.createTextNode(list.title));
         albumListItem.dataset.id = list.id;
         albumList.append(albumListItem);
@@ -61,7 +61,7 @@ function renderAlbumPhoto(albumPhoto) {
 
     albumPhoto.map((photo) => {
         const albumPhotoImg = document.createElement('img');
-        albumPhotoImg.className = 'album-photo'
+        albumPhotoImg.className = 'album-photo';
         albumPhotoImg.src = photo.thumbnailUrl;
         albumPhotoForList.append(albumPhotoImg);
     });
