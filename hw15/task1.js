@@ -8,61 +8,50 @@
 // Не забываем кидать ссылку на git hub pages.
 
 const albumList = document.querySelector('.js-album-list');
-const albumPhotoForList = document.querySelector('.js-photo-container');
+const albumPhoto = document.querySelector('.js-photo-container');
 
 init();
-createPhotoEventListener();
+createAlbumListEventListener();
 
 function init() {
     const promiseAlbumList = sendGetAlbumListRequest();
     promiseAlbumList
         .then((albumLists) => {
-            renderAlbumlist(albumLists);
-            return sendGetAlbumPhotoRequest(1);
+            renderAlbumList(albumLists);
+            const firstItemId = (albumLists.id = 1);
+            return sendGetAlbumPhotosRequest(firstItemId);
         })
 
-        .then((albumInitPhoto) => renderAlbumPhoto(albumInitPhoto));
+        .then((albumPhotos) => renderAlbumPhotos(albumPhotos));
 }
 
-function createPhotoEventListener() {
+function createAlbumListEventListener() {
     albumList.addEventListener("click", (event) => {
 
         if (event.target.classList.contains('album-list-item')) {
-            const albumListItemId = event.target.dataset.id;
+            const albumId = event.target.id;
 
-            const promiseAlbumPhoto = sendGetAlbumPhotoRequest(albumListItemId);
+            const promiseAlbumPhoto = sendGetAlbumPhotosRequest(albumId);
             promiseAlbumPhoto
-                .then((albumEventPhoto) => renderAlbumPhoto(albumEventPhoto));
+                .then((albumPhotos) => renderAlbumPhotos(albumPhotos));
         }
 
     });
 }
 
-function sendGetAlbumPhotoRequest(albumListItemId) {
-    return fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumListItemId}`).then((response) => response.json());
+function sendGetAlbumPhotosRequest(albumId) {
+    return fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`).then((response) => response.json());
 }
 
 function sendGetAlbumListRequest() {
     return fetch('https://jsonplaceholder.typicode.com/albums').then((response) => response.json());
 }
 
-function renderAlbumlist(albumLists) {
-    albumLists.map((list) => {
-        const albumListItem = document.createElement('li');
-        albumListItem.className = 'album-list-item';
-        albumListItem.append(document.createTextNode(list.title));
-        albumListItem.dataset.id = list.id;
-        albumList.append(albumListItem);
-    });
+function renderAlbumList(albumLists) {
+    albumLists.map((list) => albumList.insertAdjacentHTML('beforeend', `<li class="album-list-item" id=${list.id}>${list.title}</li>`));
 }
 
-function renderAlbumPhoto(albumPhoto) {
-    albumPhotoForList.innerHTML = '';
-
-    albumPhoto.map((photo) => {
-        const albumPhotoImg = document.createElement('img');
-        albumPhotoImg.className = 'album-photo';
-        albumPhotoImg.src = photo.thumbnailUrl;
-        albumPhotoForList.append(albumPhotoImg);
-    });
+function renderAlbumPhotos(albumPhotos) {
+    albumPhoto.innerHTML = '';
+    albumPhotos.map((photo) => albumPhoto.insertAdjacentHTML('beforeend', `<img class="album-photo" src="${photo.thumbnailUrl}">`));
 }
