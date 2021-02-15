@@ -18,7 +18,7 @@ function init() {
     promiseAlbumList
         .then((albumLists) => {
             renderAlbumList(albumLists);
-            const firstItemId = (albumLists.id = 1);
+            const firstItemId = albumLists[0].id;
             return sendGetAlbumPhotosRequest(firstItemId);
         })
 
@@ -26,7 +26,7 @@ function init() {
 }
 
 function createAlbumListEventListener() {
-    albumList.addEventListener("click", (event) => {
+    albumList.addEventListener('click', (event) => {
 
         if (event.target.classList.contains('album-list-item')) {
             const albumId = event.target.id;
