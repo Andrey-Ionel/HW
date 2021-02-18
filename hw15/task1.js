@@ -8,7 +8,7 @@
 // Не забываем кидать ссылку на git hub pages.
 
 const albumList = document.querySelector('.js-album-list');
-const albumPhoto = document.querySelector('.js-photo-container');
+const albumPhotosContainer = document.querySelector('.js-photo-container');
 
 init();
 createAlbumListEventListener();
@@ -52,6 +52,6 @@ function renderAlbumList(albumLists) {
 }
 
 function renderAlbumPhotos(albumPhotos) {
-    albumPhoto.innerHTML = '';
-    albumPhotos.map((photo) => albumPhoto.insertAdjacentHTML('beforeend', `<img class="album-photo" src="${photo.thumbnailUrl}">`));
+    albumPhotosContainer.innerHTML = '';
+    albumPhotos.map((photo) => albumPhotosContainer.insertAdjacentHTML('beforeend', `<img class="album-photo" src="${photo.thumbnailUrl}">`));
 }
