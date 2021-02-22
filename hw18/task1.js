@@ -13,16 +13,13 @@ const $todoList = $('.js-todo-list');
 const $addListButton = $('.js-add-todo');
 const $inputForAddList = $('.js-todo-name');
 const $inputForEditList = $('.js-todo-name-edit');
-const emptyListMessage = document.querySelector('.js-hidden-text');
+const $emptyListMessage = $('.js-hidden-text');
 const $formWithTodos = $('.js-todo-form');
 const $modalAddTodo = $('.js-add-modal');
 const $modalEditTodo = $('.js-edit-modal');
 const $modalAddTodoButton = $('.js-show-add-modal');
 const $cancelButton = $('.js-cancel-todo-edit');
 const $updateButton = $('.js-update-todo-edit');
-// const $inputForCheckStateList = $('.form-check-input');
-// const $modalEditTodoButton = $('.js-show-edit-modal');
-
 class TodoListRequests {
     static sendGetTodosRequest() {
         return fetch('https://jsonplaceholder.typicode.com/todos').then((response) => response.json());
@@ -53,7 +50,10 @@ class TodoListRequests {
     static sendPutEditTodosRequest(id, title) {
         return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
             method: 'PUT',
-            body: JSON.stringify(title),
+            body: JSON.stringify({
+                id,
+                title,
+            }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
@@ -326,8 +326,8 @@ function getListItem(item) {
 
 function changeVisibilityEmptyListMessage() {
     if ($todoList.children().length >= 1) {
-        emptyListMessage.hidden = true;
+        $emptyListMessage.hide();
     } else {
-        emptyListMessage.hidden = false;
+        $emptyListMessage.show();
     }
 }
