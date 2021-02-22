@@ -145,26 +145,6 @@ class TodoListLogic {
         return $initialInputValue;
     }
 
-    // static changeStateTodolist(event) {
-    //     const checkStateList = event.target.classList.contains('form-check-input');
-    //     let changedListState = '';
-    //     const todoListElement = event.target.closest('li');
-    //     const listId = todoListElement.id;
-    //     if (checkStateList.check === false) {
-    //         changedListState = 'true';
-    //     } else {
-    //         changedListState = 'false';
-    //     }
-
-    //     if (checkStateList) {
-    //         const promisePutTodoList = TodoListRequests.sendPutTodosRequest(changedListState, listId);
-    //         promisePutTodoList.then(() => {
-    //             todoListElement.classList.toggle('list-group-item-warning');
-    //             todoListElement.classList.toggle('list-group-item-success');
-    //         });
-    //     }
-    // }
-
     static changeColorTodolist(event) {
         const todoListElementTarget = event.target.classList.contains('list-group-item');
         const todoListElement = event.target.closest('li');
