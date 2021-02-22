@@ -197,7 +197,7 @@ class TodoListLogic {
 
                 return todo;
             });
-            const updatedListItem = getListItem(listTitle);
+            const updatedListItem = getListItem(updatedTodoList);
             const listItem = $todoList.find(`li[id="${listId}"]`);
             listItem.replaceWith(updatedListItem);
             $inputForEditList.val('');
