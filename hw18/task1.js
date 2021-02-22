@@ -10,7 +10,7 @@
 // Если по ДЗ что то не понятно, пересмотрите конец занятия где я об этом рассказываю.
 
 const $todoList = $('.js-todo-list');
-const addListButton = document.querySelector('.js-add-todo');
+const $addListButton = $('.js-add-todo');
 const $inputForAddList = $('.js-todo-name');
 const $inputForEditList = $('.js-todo-name-edit');
 const emptyListMessage = document.querySelector('.js-hidden-text');
@@ -184,7 +184,9 @@ class TodoListLogic {
     static updateTodoList() {
         const listTitle = $inputForEditList.val();
         const listId = todosRepository.selectedTodoId;
+
         const promisePutEditTodoList = TodoListRequests.sendPutEditTodosRequest(listId, listTitle);
+
         promisePutEditTodoList.then((updatedTodoList) => {
             todosRepository.selectedTodoId = null;
 
@@ -193,11 +195,12 @@ class TodoListLogic {
                     return updatedTodoList;
                 }
 
-                return listTitle;
+                return todo;
             });
             const updatedListItem = getListItem(listTitle);
             const listItem = $todoList.find(`li[id="${listId}"]`);
             listItem.replaceWith(updatedListItem);
+            $inputForEditList.val('');
         });
 
         $modalEditTodo.dialog('close');
@@ -239,7 +242,7 @@ function init() {
 }
 
 function createAddTodolistEventListener() {
-    addListButton.addEventListener('click', () => {
+    $addListButton.click(() => {
         TodoListLogic.createTodolist();
     });
 }
