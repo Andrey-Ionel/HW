@@ -11,24 +11,25 @@
 
 const $todoList = $('.js-todo-list');
 const $addListButton = $('.js-add-todo');
-const $inputForAddList = $('.js-todo-name');
-const $inputForEditList = $('.js-todo-name-edit');
-const $emptyListMessage = $('.js-hidden-text');
 const $formWithTodos = $('.js-todo-form');
-const $modalAddTodo = $('.js-add-modal');
-const $modalEditTodo = $('.js-edit-modal');
-const $modalAddTodoButton = $('.js-show-add-modal');
-const $cancelButton = $('.js-cancel-todo-edit');
-const $updateButton = $('.js-update-todo-edit');
+const $inputForAddList = $('.js-todo-name');
+const $emptyListMessage = $('.js-hidden-text');
+const $inputForEditList = $('.js-todo-name-edit');
+const $cancelEditButton = $('.js-cancel-todo-edit');
+const $updateEditButton = $('.js-update-todo-edit');
+const $addModalTodoButton = $('.js-show-add-modal');
+const $addTodoModalWidget = $('.js-add-modal-widget');
+const $editTodoModalWidget = $('.js-edit-modal-widget');
+const $todoListCheckStateInput = $('.js-edit-check-input');
 class TodoListRequests {
     static sendGetTodosRequest() {
         return fetch('https://jsonplaceholder.typicode.com/todos').then((response) => response.json());
     }
 
-    static sendPostTodosRequest(currentInputValue, listId) {
+    static sendPostTodosRequest(title, id) {
         return fetch('https://jsonplaceholder.typicode.com/todos', {
             method: 'POST',
-            body: JSON.stringify({ title: currentInputValue, id: listId }),
+            body: JSON.stringify({ title, id }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
@@ -36,23 +37,13 @@ class TodoListRequests {
             .then((response) => response.json());
     }
 
-    static sendPutTodosRequest(changedListState, listId) {
-        return fetch(`https://jsonplaceholder.typicode.com/todos/${listId}`, {
-            method: 'PUT',
-            body: JSON.stringify({ completed: changedListState, id: listId }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-            .then((response) => response.json());
-    }
-
-    static sendPutEditTodosRequest(id, title) {
+    static sendPutEditTodosRequest(id, title, completed) {
         return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 id,
                 title,
+                completed,
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -61,8 +52,8 @@ class TodoListRequests {
             .then((response) => response.json());
     }
 
-    static sendDeleteTodosRequest(listId) {
-        return fetch(`https://jsonplaceholder.typicode.com/todos/${listId}`, {
+    static sendDeleteTodosRequest(id) {
+        return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
             method: 'DELETE',
         });
     }
@@ -82,8 +73,8 @@ class TodoUI {
                 duration: 900,
             },
         };
-        $modalAddTodo.dialog(baseModalOptions);
-        $modalEditTodo.dialog(baseModalOptions);
+        $addTodoModalWidget.dialog(baseModalOptions);
+        $editTodoModalWidget.dialog(baseModalOptions);
     }
 }
 
@@ -127,49 +118,28 @@ class TodoListLogic {
     }
 
     static createTodolist() {
-        const $currentInputValue = $inputForAddList.val();
-        const $initialInputValue = $inputForAddList.val('');
+        const currentAddInputValue = $inputForAddList.val();
+        const initialAddInputValue = $inputForAddList.val('');
 
-        if ($currentInputValue && $currentInputValue.trim().length) {
+        if (currentAddInputValue && currentAddInputValue.trim().length) {
             changeVisibilityEmptyListMessage();
-            const promisePostTodoList = TodoListRequests.sendPostTodosRequest($currentInputValue);
+            const promisePostTodoList = TodoListRequests.sendPostTodosRequest(currentAddInputValue);
             promisePostTodoList.then((todo) => {
                 renderTodolist(todo);
                 todosRepository.todos = [...todosRepository.todos, todo];
             });
-            $modalAddTodo.dialog('close');
-            return $initialInputValue;
+            $addTodoModalWidget.dialog('close');
+            return initialAddInputValue;
         }
 
         alert('Your input is empty');
-        return $initialInputValue;
-    }
-
-    static changeColorTodolist(event) {
-        const todoListElementTarget = event.target.classList.contains('list-group-item');
-        const todoListElement = event.target.closest('li');
-        const listId = todoListElement.id;
-        let changedListState = '';
-
-        if (todoListElement.classList.contains('list-group-item-warning')) {
-            changedListState = 'true';
-        } else {
-            changedListState = 'false';
-        }
-
-        if (todoListElementTarget) {
-            const promisePutTodoList = TodoListRequests.sendPutTodosRequest(changedListState, listId);
-            promisePutTodoList.then(() => {
-                todoListElement.classList.toggle('list-group-item-warning');
-                todoListElement.classList.toggle('list-group-item-success');
-            });
-        }
+        return initialAddInputValue;
     }
 
     static removeTodolist(event) {
-        const todoCloseButton = event.target.classList.contains('bi-x-square');
-        const todoListElement = event.target.closest('li');
-        const listId = todoListElement.id;
+        const todoCloseButton = $(event.target).hasClass('bi-x-square');
+        const todoListElement = $(event.target).closest('li');
+        const listId = todoListElement[0].id;
 
         if (todoCloseButton) {
             const promiseDeleteTodoList = TodoListRequests.sendDeleteTodosRequest(listId);
@@ -181,11 +151,41 @@ class TodoListLogic {
         }
     }
 
+    static editTodoList(event) {
+        const editModalTodoButton = $(event.target).hasClass('js-show-edit-modal');
+        const todoListItem = $(event.target).closest('li');
+        todosRepository.selectedTodoId = parseInt(todoListItem[0].id, 10);
+        todosRepository.getTodoById(todosRepository.selectedTodoId);
+
+        if (editModalTodoButton) {
+            $editTodoModalWidget.dialog('open');
+            $inputForEditList[0].value = todoListItem.text().trim();
+        }
+
+        if (todoListItem.hasClass('list-group-item-warning')) {
+            $todoListCheckStateInput[0].checked = false;
+        } else {
+            $todoListCheckStateInput[0].checked = true;
+        }
+    }
+
+    static cancelEdit() {
+        const initialEditInputValue = $inputForEditList.val('');
+        $editTodoModalWidget.dialog('close');
+        return initialEditInputValue;
+    }
+
     static updateTodoList() {
         const listTitle = $inputForEditList.val();
         const listId = todosRepository.selectedTodoId;
+        let changedListState = null;
+        if ($todoListCheckStateInput[0].checked === false) {
+            changedListState = false;
+        } else if ($todoListCheckStateInput[0].checked === true) {
+            changedListState = true;
+        }
 
-        const promisePutEditTodoList = TodoListRequests.sendPutEditTodosRequest(listId, listTitle);
+        const promisePutEditTodoList = TodoListRequests.sendPutEditTodosRequest(listId, listTitle, changedListState);
 
         promisePutEditTodoList.then((updatedTodoList) => {
             todosRepository.selectedTodoId = null;
@@ -197,96 +197,38 @@ class TodoListLogic {
 
                 return todo;
             });
+
             const updatedListItem = getListItem(updatedTodoList);
             const listItem = $todoList.find(`li[id="${listId}"]`);
             listItem.replaceWith(updatedListItem);
             $inputForEditList.val('');
+            $editTodoModalWidget.dialog('close');
         });
-
-        $modalEditTodo.dialog('close');
     }
-
-    static editTodoList(event) {
-        const $todoEditButton = $(event.target.classList.contains('.js-show-edit-modal'));
-        const $todoListItem = $(event.target).closest('li');
-        todosRepository.selectedTodoId = parseInt($todoListItem[0].id, 10);
-        todosRepository.getTodoById(todosRepository.selectedTodoId);
-
-        if ($todoEditButton) {
-            $modalEditTodo.dialog('open');
-            $inputForEditList[0].value = $todoListItem.text().trim();
-        }
-    }
-
-    static cancelEdit() {
-        const $initialInputValue = $inputForEditList.val('');
-        $modalEditTodo.dialog('close');
-        return $initialInputValue;
-    }
-}
-
-init();
-
-function init() {
-    TodoUI.initModals();
-    TodoListLogic.getTodosList();
-    createCancelEditEventListener();
-    disableEnterKeyEventListener();
-    createUpdateEditEventListener();
-    createAddTodolistEventListener();
-    createAddTodolistModalEventListener();
-    createEditTodolistModalEventListener();
-    createRemoveTodoListEventListener();
-    createChangeColorTodoListEventListener();
-    // createCheckStateEventListener();
 }
 
 function createAddTodolistEventListener() {
-    $addListButton.click(() => {
-        TodoListLogic.createTodolist();
-    });
+    $addListButton.click(() => TodoListLogic.createTodolist());
 }
 
 function createAddTodolistModalEventListener() {
-    $modalAddTodoButton.click(() => {
-        $modalAddTodo.dialog('open');
-    });
+    $addModalTodoButton.click(() => $addTodoModalWidget.dialog('open'));
 }
 
 function createCancelEditEventListener() {
-    $cancelButton.click(() => {
-        TodoListLogic.cancelEdit();
-    });
+    $cancelEditButton.click(() => TodoListLogic.cancelEdit());
 }
 
 function createUpdateEditEventListener() {
-    $updateButton.click(() => {
-        TodoListLogic.updateTodoList();
-    });
+    $updateEditButton.click(() => TodoListLogic.updateTodoList());
 }
 
-// function createCheckStateEventListener() {
-//     $inputForCheckStateList.click((event) => {
-//         TodoListLogic.changeStateTodolist(event);
-//     });
-// }
-
 function createEditTodolistModalEventListener() {
-    $todoList.delegate('.js-show-edit-modal', 'click', (event) => {
-        TodoListLogic.editTodoList(event);
-    });
+    $todoList.delegate('.js-show-edit-modal', 'click', (event) => TodoListLogic.editTodoList(event));
 }
 
 function createRemoveTodoListEventListener() {
-    $todoList.click((event) => {
-        TodoListLogic.removeTodolist(event);
-    });
-}
-
-function createChangeColorTodoListEventListener() {
-    $todoList.click((event) => {
-        TodoListLogic.changeColorTodolist(event);
-    });
+    $todoList.click((event) => TodoListLogic.removeTodolist(event));
 }
 
 function disableEnterKeyEventListener() {
@@ -331,3 +273,17 @@ function changeVisibilityEmptyListMessage() {
         $emptyListMessage.show();
     }
 }
+
+function init() {
+    TodoUI.initModals();
+    TodoListLogic.getTodosList();
+    disableEnterKeyEventListener();
+    createUpdateEditEventListener();
+    createCancelEditEventListener();
+    createAddTodolistEventListener();
+    createRemoveTodoListEventListener();
+    createAddTodolistModalEventListener();
+    createEditTodolistModalEventListener();
+}
+
+init();

@@ -16,7 +16,7 @@
 <body>
     <div class="mx-auto" style="width: 1000px;">
         <h1 class="text-center my-3">TodoList</h1>
-        <div class="js-add-modal" title="ADD TodoList">
+        <div class="js-add-modal-widget" title="ADD TodoList">
             <form class="js-todo-form position-relative">
                 <label for="exampleInput" class="form-label" id="exampleInput">Todo Name</label>
                 <input class="js-todo-name mb-3 shadow bg-white rounded w-100 p-2" type="text" name="todo"
@@ -28,14 +28,13 @@
                 <button class="js-add-todo btn btn-dark shadow px-5 py-2" type="button">ADD</button>
             </form>
         </div>
-
-        <div class="js-edit-modal" title="Edit TodoList">
+        <div class="js-edit-modal-widget" title="Edit TodoList">
             <form class="js-todo-form position-relative">
                 <label for="exampleInput" class="form-label" id="exampleInput">Todo Name</label>
                 <input class="js-todo-name-edit mb-3 shadow bg-white rounded w-100 p-2" type="text" name="todo"
                     placeholder="type your list here">
                 <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <input type="checkbox" class="form-check-input js-edit-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Done</label>
                 </div>
                 <div class="d-flex">
@@ -44,7 +43,6 @@
                 </div>
             </form>
         </div>
-
         <button class="js-show-add-modal btn btn-dark shadow px-5 py-3 translate-middle-y" type="button">ADD</button>
         <div class=" shadow bg-white rounded w-100 p-3 border border-4">
             <p class="js-hidden-text">Your TodoList is empty</p>
