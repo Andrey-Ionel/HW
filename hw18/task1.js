@@ -106,7 +106,6 @@ class TodosRepository {
 }
 
 const todosRepository = new TodosRepository();
-
 class TodoListLogic {
     static getTodosList() {
         const promiseTodoList = TodoListRequests.sendGetTodosRequest();
