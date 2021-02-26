@@ -21,6 +21,7 @@ const $addModalTodoButton = $('.js-show-add-modal');
 const $addTodoModalWidget = $('.js-add-modal-widget');
 const $editTodoModalWidget = $('.js-edit-modal-widget');
 const $todoListCheckStateInput = $('.js-edit-check-input');
+
 class TodoListRequests {
     static sendGetTodosRequest() {
         return fetch('https://jsonplaceholder.typicode.com/todos').then((response) => response.json());
@@ -106,6 +107,7 @@ class TodosRepository {
 }
 
 const todosRepository = new TodosRepository();
+
 class TodoListLogic {
     static getTodosList() {
         const promiseTodoList = TodoListRequests.sendGetTodosRequest();
