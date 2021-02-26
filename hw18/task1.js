@@ -208,7 +208,7 @@ class TodoListLogic {
 }
 
 function createAddTodolistEventListener() {
-    $addListButton.click(() => TodoListLogic.createTodolist());
+    $addListButton.click(TodoListLogic.createTodolist);
 }
 
 function createAddTodolistModalEventListener() {
@@ -216,19 +216,19 @@ function createAddTodolistModalEventListener() {
 }
 
 function createCancelEditEventListener() {
-    $cancelEditButton.click(() => TodoListLogic.cancelEdit());
+    $cancelEditButton.click(TodoListLogic.cancelEdit);
 }
 
 function createUpdateEditEventListener() {
-    $updateEditButton.click(() => TodoListLogic.updateTodoList());
+    $updateEditButton.click(TodoListLogic.updateTodoList);
 }
 
 function createEditTodolistModalEventListener() {
-    $todoList.delegate('.js-show-edit-modal', 'click', (event) => TodoListLogic.editTodoList(event));
+    $todoList.delegate('.js-show-edit-modal', 'click', TodoListLogic.editTodoList);
 }
 
 function createRemoveTodoListEventListener() {
-    $todoList.click((event) => TodoListLogic.removeTodolist(event));
+    $todoList.click(TodoListLogic.removeTodolist);
 }
 
 function disableEnterKeyEventListener() {
@@ -240,8 +240,8 @@ function disableEnterKeyEventListener() {
 }
 
 function renderTodoslist(todos) {
-    const todoListItem = todos.map((list) => getListItem(list));
-    $todoList.html(todoListItem.join(''));
+    const todoListItems = todos.map(getListItem);
+    $todoList.html(todoListItems.join(''));
     changeVisibilityEmptyListMessage();
 }
 
@@ -252,12 +252,7 @@ function renderTodolist(list) {
 }
 
 function getListItem(item) {
-    let todoListElementState = item.completed;
-    if (item.completed === false || item.completed === undefined) {
-        todoListElementState = 'list-group-item-warning';
-    } else if (item.completed === true) {
-        todoListElementState = 'list-group-item-success';
-    }
+    const todoListElementState = item.completed ? 'list-group-item-success' : 'list-group-item-warning';
     return `
     <li class="list-group-item ${todoListElementState} my-1 d-flex bd-highlight" id=${item.id}>${item.title}
         <i class="bi bi-pencil-square ms-3 bd-highlight me-auto js-show-edit-modal"></i>
@@ -267,7 +262,7 @@ function getListItem(item) {
 }
 
 function changeVisibilityEmptyListMessage() {
-    if ($todoList.children().length >= 1) {
+    if ($todoList.children().length) {
         $emptyListMessage.hide();
     } else {
         $emptyListMessage.show();
