@@ -8,27 +8,36 @@
 // calc.div(10); // 11
 // calc.set(100); // 100
 
-function createCalculator(initialValue) {
-    let valueOfCalculator = parseFloat(initialValue);
+// function createCalculator(valueOfCalculator) {
 
-    const calculateSumOfNumbers = (sum) => valueOfCalculator += parseFloat(sum);
+//     const sum = (sum) => valueOfCalculator += parseFloat(sum);
 
-    const calculateMultiplicationOfNumbers = (multiplication) => valueOfCalculator *= parseFloat(multiplication);
+//     const mult = (multiplication) => valueOfCalculator *= parseFloat(multiplication);
 
-    const calculateSubtractionOfNumbers = (subtraction) => valueOfCalculator -= parseFloat(subtraction);
+//     const sub = (subtraction) => valueOfCalculator -= parseFloat(subtraction);
 
-    const calculateDivisionOfNumbers = (division) => valueOfCalculator /= parseFloat(division);
+//     const div = (division) => valueOfCalculator /= parseFloat(division);
 
-    const setAnyNumericValue = (setValue) => valueOfCalculator = parseFloat(setValue);
+//     const set = (setValue) => valueOfCalculator = parseFloat(setValue);
 
-    const showCalculatorValueLog = () => console.log(valueOfCalculator);
+//     const showCalculatorValueLog = () => console.log(valueOfCalculator);
 
+//     return {
+//         sum,
+//         mult,
+//         sub,
+//         div,
+//         set,
+//         showCalculatorValueLog
+//     }
+// }
+
+function createCalculator(currentNumber) {
     return {
-        calculateSumOfNumbers,
-        calculateMultiplicationOfNumbers,
-        calculateSubtractionOfNumbers,
-        calculateDivisionOfNumbers,
-        setAnyNumericValue,
-        showCalculatorValueLog
+        sum: (number) => currentNumber += number,
+        sub: (number) => currentNumber -= number,
+        mult: (number) => currentNumber *= number,
+        div: (number) => currentNumber /= number,
+        set: (number) => currentNumber = number,
     }
 }
