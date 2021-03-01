@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // Файл app.js
 
 // const calculator = require('./calculator');
@@ -15,10 +16,3 @@
 // 2) set, add, sub, mult, div должны быть отдельными файлами и подключаться в файл calculator
 
 const calculator = require('./calculator');
-
-calculator.set(10);
-
-console.log(calculator.add(2));
-console.log(calculator.sub(5));
-console.log(calculator.mult(4));
-console.log(calculator.div(2));

@@ -5,7 +5,7 @@ const mult = require('./mult');
 const div = require('./div');
 const set = require('./set');
 
-function createCalculator(currentNumber) {
+function createCalculator() {
   return {
     add,
     sub,
