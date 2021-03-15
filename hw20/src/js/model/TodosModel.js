@@ -46,32 +46,26 @@ class TodosModel {
         return fetch(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, {
             method: 'DELETE',
         });
-        // .then((response) => response.json())
-        // .then((removeTodo) => {
-        //     this.todos = this.todos.map((todo) => {
-        //         if (todo.id === id) {
-        //             return removeTodo;
-        //         }
-        //         return todo;
-        //     });
-        // });
     }
 
-    async createTodolist(title, id) {
-        const todo = this.todos.find((todo) => todo.id === id);
-        this.todos = [...this.todos, todo];
+    async createTodolist(title) {
         return fetch('https://jsonplaceholder.typicode.com/todos', {
             method: 'POST',
             body: JSON.stringify({
                 title,
-                id,
                 completed: false,
             }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         })
-            .then((response) => response.json());
-        // .then((newTodo) => todo = newTodo);
+            .then((response) => response.json())
+            .then((newTodo) => {
+                if (title && title.trim().length) {
+                    this.todos = [newTodo, ...this.todos];
+                    return newTodo;
+                }
+                return null;
+            });
     }
 }

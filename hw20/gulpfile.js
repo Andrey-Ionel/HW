@@ -4,11 +4,11 @@ const browserSync = require('browser-sync').create();
 const clean = require('gulp-clean');
 
 function cleanDist() {
-    return src('dist', { read: false }).pipe(clean());
+    return src('docs', { read: false }).pipe(clean());
 }
 
 function copyHtml() {
-    return src('src/index.html').pipe(dest('./dist'));
+    return src('src/index.html').pipe(dest('./docs'));
 }
 
 function copyVendorsJs() {
@@ -16,7 +16,7 @@ function copyVendorsJs() {
         './node_modules/jquery/dist/jquery.min.js',
     ])
         .pipe(concat('vendors.js'))
-        .pipe(dest('./dist'));
+        .pipe(dest('./docs'));
 }
 
 function copyVendorsCss() {
@@ -24,25 +24,25 @@ function copyVendorsCss() {
         './node_modules/bootstrap/dist/css/bootstrap.min.css',
     ])
         .pipe(concat('vendors.css'))
-        .pipe(dest('./dist'));
+        .pipe(dest('./docs'));
 }
 
 function copyCss() {
     return src('src/**/*.css')
         .pipe(concat('styles.css'))
-        .pipe(dest('./dist'));
+        .pipe(dest('./docs'));
 }
 
 function copyJs() {
     return src('src/**/*.js')
         .pipe(concat('scripts.js'))
-        .pipe(dest('./dist'));
+        .pipe(dest('./docs'));
 }
 
 function startServer(cb) {
     browserSync.init({
         server: {
-            baseDir: './dist',
+            baseDir: './docs',
         },
     });
 

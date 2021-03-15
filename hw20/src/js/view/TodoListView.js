@@ -5,32 +5,19 @@ class TodoListView {
         this.config = config;
         this.$list = this.generateList();
         this.removeTodoAddEventListener();
-        this.$form = this.generateForm();
-        this.renderForm();
     }
 
     generateList() {
         return $(`
-            <ul class="list-group js-list lead"></ul>
+            <ul class="list-group js-todo-list lead"></ul>
         `).click((e) => this.onClickTodo(e));
     }
 
     removeTodoAddEventListener() {
-        return this.$list.click((event) => this.onClickCloseButton(event));
+        return this.$list.click((e) => this.onClickCloseButton(e));
     }
 
-    generateForm() {
-        return $(`
-        <form class="js-todo-form position-relative">
-            <input class="js-todo-name my-5 shadow bg-white rounded w-100 p-3 pe-5" type="text" name="todo"
-                placeholder="type your list here">
-            <button class="js-add-todo btn btn-dark shadow px-5 py-3 position-absolute top-50 end-0 translate-middle-y"
-                type="button">ADD</button>
-        </form>
-    `).click((event) => this.onClickAddButton(event));
-    }
-
-    generateTodo(todo) {
+    generateTodos(todo) {
         const doneClass = todo.completed ? 'done' : 'not-done';
 
         return `
@@ -40,19 +27,9 @@ class TodoListView {
         `;
     }
 
-    renderForm() {
-        const $app = $('.app');
-        $app.append(this.$form);
-    }
-
     renderTodos(todos) {
-        const todosHtml = todos.map(this.generateTodo);
+        const todosHtml = todos.map(this.generateTodos);
         this.$list.html(todosHtml);
-    }
-
-    renderTodo(todo) {
-        const todoItem = this.generateTodo(todo);
-        this.$list.prepend(todoItem);
     }
 
     removeTodo(id) {
@@ -60,20 +37,6 @@ class TodoListView {
         if (todoListItem) {
             todoListItem.remove();
         }
-    }
-
-    createTodolist(todo) {
-        const currentAddInputValue = $('.js-todo-name').val();
-        const initialAddInputValue = $('.js-todo-name').val('');
-
-        if (currentAddInputValue && currentAddInputValue.trim().length) {
-            this.renderTodo(todo);
-
-            return initialAddInputValue;
-        }
-
-        alert('Your input is empty');
-        return initialAddInputValue;
     }
 
     onClickTodo(e) {
@@ -84,21 +47,13 @@ class TodoListView {
         }
     }
 
-    onClickCloseButton(event) {
-        const todoCloseButton = $(event.target).hasClass('bi-trash');
-        const todoListItem = $(event.target).closest('li');
+    onClickCloseButton(e) {
+        const todoCloseButton = $(e.target).hasClass('bi-trash');
+        const todoListItem = $(e.target).closest('li');
         const listId = todoListItem.data('id');
 
         if (todoCloseButton) {
             this.config.removeTodolist(listId);
-        }
-    }
-
-    onClickAddButton(event) {
-        const todoAddButton = $(event.target).hasClass('js-add-todo');
-        if (todoAddButton) {
-            const currentAddInputValue = $('.js-todo-name').val();
-            this.config.createTodolist(currentAddInputValue);
         }
     }
 }
