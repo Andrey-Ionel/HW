@@ -5,7 +5,7 @@ class TodosController {
         this.todoListView = new TodoListView({
             toggleCompleted: (id) => this.toggleCompleted(id),
             removeTodolist: (id) => this.removeTodolist(id),
-            createTodolist: (todo) => this.createTodolist(todo),
+            createTodolist: (todo, id) => this.createTodolist(todo, id),
         });
         this.todosModel = new TodosModel();
 
@@ -33,7 +33,7 @@ class TodosController {
 
     async createTodolist(todo, id) {
         const promisePostTodoList = this.todosModel.createTodolist(todo, id);
-        await this.todosModel.createTodolist(todo, id);
-        promisePostTodoList.then((todo) => this.todoListView.createTodolist(todo, id));
+        // await this.todosModel.createTodolist(todo, id);
+        promisePostTodoList.then((todo) => this.todoListView.createTodolist(todo));
     }
 }

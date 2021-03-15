@@ -41,7 +41,7 @@ class TodosModel {
 
     async removeTodolist(id) {
         const todo = this.todos.find((todo) => todo.id === id);
-        // const removeTodo = [];
+        this.todos = this.todos.filter((todo) => todo.id !== id);
 
         return fetch(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, {
             method: 'DELETE',
@@ -58,7 +58,8 @@ class TodosModel {
     }
 
     async createTodolist(title, id) {
-        // let todo = this.todos.find((todo) => todo.id === id);
+        const todo = this.todos.find((todo) => todo.id === id);
+        this.todos = [...this.todos, todo];
         return fetch('https://jsonplaceholder.typicode.com/todos', {
             method: 'POST',
             body: JSON.stringify({
@@ -70,7 +71,7 @@ class TodosModel {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         })
-            .then((response) => response.json())
+            .then((response) => response.json());
         // .then((newTodo) => todo = newTodo);
     }
 }
