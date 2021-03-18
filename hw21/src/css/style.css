@@ -14,6 +14,9 @@
 .album-list-item:hover {
     box-shadow: 0 3px 5px rgba(127, 160, 165, 0.5);
 }
+.album-list-item:active {
+    box-shadow:inset 0 3px 5px rgba(127, 160, 165, 0.5);
+}
 .album-heading {
     border-bottom: 5px solid gray;
     margin-bottom: 20px;
