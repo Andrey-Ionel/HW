@@ -53,7 +53,7 @@ class TodoListView {
         const listId = todoListItem.data('id');
 
         if (todoCloseButton) {
-            this.config.removeTodolist(listId);
+            this.config.removeTodo(listId);
         }
     }
 }

@@ -38,7 +38,7 @@ class TodoFormView {
     $app.append(this.$todoForm);
   }
 
-  createTodolist(todo) {
+  addNewTodo(todo) {
     const currentAddInputValue = $('.js-todo-name').val();
     const initialAddInputValue = $('.js-todo-name').val('');
 
@@ -62,7 +62,7 @@ class TodoFormView {
     const todoAddButton = $(e.target).hasClass('js-add-todo');
     if (todoAddButton) {
       const currentAddInputValue = $('.js-todo-name').val();
-      this.config.createTodolist(currentAddInputValue);
+      this.config.addNewTodo(currentAddInputValue);
     }
   }
 

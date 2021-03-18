@@ -10,11 +10,11 @@ class TodosController {
     constructor() {
         this.todoListView = new TodoListView({
             toggleCompleted: (id) => this.toggleCompleted(id),
-            removeTodolist: (id) => this.removeTodolist(id),
+            removeTodo: (id) => this.removeTodo(id),
         });
 
         this.todoFormView = new TodoFormView({
-            createTodolist: (todo) => this.createTodolist(todo),
+            addNewTodo: (todo) => this.addNewTodo(todo),
         });
 
         this.todosModel = new TodosModel();
@@ -36,14 +36,14 @@ class TodosController {
         this.todoListView.renderTodos(this.todosModel.todos);
     }
 
-    async removeTodolist(id) {
-        await this.todosModel.removeTodolist(id);
+    async removeTodo(id) {
+        await this.todosModel.removeTodo(id);
         this.todoListView.removeTodo(id);
     }
 
-    async createTodolist(todo) {
-        await this.todosModel.createTodolist(todo)
-            .then((newTodo) => this.todoFormView.createTodolist(newTodo));
+    async addNewTodo(todo) {
+        const newTodo = await this.todosModel.addNewTodo(todo);
+        this.todoFormView.addNewTodo(newTodo);
     }
 }
 
@@ -88,16 +88,16 @@ class TodosModel {
             });
     }
 
-    async removeTodolist(id) {
+    async removeTodo(id) {
         const todo = this.todos.find((todo) => todo.id === id);
         this.todos = this.todos.filter((todo) => todo.id !== id);
 
-        return fetch(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, {
+        return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
             method: 'DELETE',
         });
     }
 
-    async createTodolist(title) {
+    async addNewTodo(title) {
         return fetch('https://jsonplaceholder.typicode.com/todos', {
             method: 'POST',
             body: JSON.stringify({
@@ -159,7 +159,7 @@ class TodoFormView {
     $app.append(this.$todoForm);
   }
 
-  createTodolist(todo) {
+  addNewTodo(todo) {
     const currentAddInputValue = $('.js-todo-name').val();
     const initialAddInputValue = $('.js-todo-name').val('');
 
@@ -183,7 +183,7 @@ class TodoFormView {
     const todoAddButton = $(e.target).hasClass('js-add-todo');
     if (todoAddButton) {
       const currentAddInputValue = $('.js-todo-name').val();
-      this.config.createTodolist(currentAddInputValue);
+      this.config.addNewTodo(currentAddInputValue);
     }
   }
 
@@ -249,7 +249,7 @@ class TodoListView {
         const listId = todoListItem.data('id');
 
         if (todoCloseButton) {
-            this.config.removeTodolist(listId);
+            this.config.removeTodo(listId);
         }
     }
 }

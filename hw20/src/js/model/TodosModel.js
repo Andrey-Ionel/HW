@@ -39,16 +39,16 @@ class TodosModel {
             });
     }
 
-    async removeTodolist(id) {
+    async removeTodo(id) {
         const todo = this.todos.find((todo) => todo.id === id);
         this.todos = this.todos.filter((todo) => todo.id !== id);
 
-        return fetch(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, {
+        return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
             method: 'DELETE',
         });
     }
 
-    async createTodolist(title) {
+    async addNewTodo(title) {
         return fetch('https://jsonplaceholder.typicode.com/todos', {
             method: 'POST',
             body: JSON.stringify({
