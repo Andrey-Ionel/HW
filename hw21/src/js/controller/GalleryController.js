@@ -27,17 +27,15 @@ export class GalleryController {
     }
 
     async init() {
-        await this.albumsModel.sendGetAlbumListRequest()
-            .then((albumList) => {
-                this.albumsView.renderAlbumList(albumList);
-                const firstItemId = albumList[0].id;
-                return this.albumPhotosModel.sendGetAlbumPhotosRequest(firstItemId);
-            })
-            .then((albumPhotos) => this.albumPhotosView.renderAlbumPhotos(albumPhotos));
+        const albumList = await this.albumsModel.sendGetAlbumListRequest();
+        this.albumsView.renderAlbumList(albumList);
+        const firstItemId = albumList[0].id;
+        const albumPhotos = await this.albumPhotosModel.sendGetAlbumPhotosRequest(firstItemId);
+        this.albumPhotosView.renderAlbumPhotos(albumPhotos);
     }
 
     async createAlbumPhotos(id) {
-        await this.albumPhotosModel.sendGetAlbumPhotosRequest(id)
-            .then((albumPhotos) => this.albumPhotosView.renderAlbumPhotos(albumPhotos));
+        const albumPhotos = await this.albumPhotosModel.sendGetAlbumPhotosRequest(id);
+        this.albumPhotosView.renderAlbumPhotos(albumPhotos);
     }
 }
