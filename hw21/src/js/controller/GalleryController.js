@@ -10,7 +10,7 @@ import { AlbumPhotosModel } from '../model/AlbumPhotosModel';
 export class GalleryController {
     constructor() {
         this.galleryView = new GalleryView();
-        this.albumsView = new AlbumsView({ createAlbumPhotos: (id) => this.createAlbumPhotos(id) });
+        this.albumsView = new AlbumsView({ showAlbumPhotos: (id) => this.showAlbumPhotos(id) });
         this.albumPhotosView = new AlbumPhotosView();
         this.albumsModel = new AlbumsModel();
         this.albumPhotosModel = new AlbumPhotosModel();
@@ -29,12 +29,12 @@ export class GalleryController {
     async init() {
         const albumList = await this.albumsModel.sendGetAlbumListRequest();
         this.albumsView.renderAlbumList(albumList);
-        const firstItemId = albumList[0].id;
-        const albumPhotos = await this.albumPhotosModel.sendGetAlbumPhotosRequest(firstItemId);
+        const firstAlbumId = albumList[0].id;
+        const albumPhotos = await this.albumPhotosModel.sendGetAlbumPhotosRequest(firstAlbumId);
         this.albumPhotosView.renderAlbumPhotos(albumPhotos);
     }
 
-    async createAlbumPhotos(id) {
+    async showAlbumPhotos(id) {
         const albumPhotos = await this.albumPhotosModel.sendGetAlbumPhotosRequest(id);
         this.albumPhotosView.renderAlbumPhotos(albumPhotos);
     }

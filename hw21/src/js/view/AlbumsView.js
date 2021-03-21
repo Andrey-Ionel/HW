@@ -14,9 +14,9 @@ export class AlbumsView {
     </div>`);
   }
 
-  renderAlbumList(albumLists) {
+  renderAlbumList(albums) {
     const $albumList = $('.js-album-list');
-    albumLists.map((list) => $albumList.append(`<li class="album-list-item" id=${list.id}>${list.title}</li>`));
+    albums.map((list) => $albumList.append(`<li class="album-list-item" id=${list.id}>${list.title}</li>`));
   }
 
   createAlbumListEventListener() {
@@ -26,7 +26,7 @@ export class AlbumsView {
   onClickAlbumList(event) {
     if (event.target.classList.contains('album-list-item')) {
       const albumId = event.target.id;
-      this.config.createAlbumPhotos(albumId);
+      this.config.showAlbumPhotos(albumId);
     }
   }
 }
