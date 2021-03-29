@@ -13,6 +13,8 @@ const port = 7777;
 //   res.sendFile(`${__dirname}/dist/index.html`);
 // });
 
+app.use(express.static('dist'));
+
 const server = http.createServer(app);
 
 const wss = new WebSocket.Server({ server });
