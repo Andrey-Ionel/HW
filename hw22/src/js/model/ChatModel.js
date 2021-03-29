@@ -8,7 +8,7 @@ export class ChatModel {
     }
 
     async addChatData(message, author) {
-        const socket = new WebSocket('ws://andreychatserve.herokuapp.com/');
+        const socket = new WebSocket('ws://localhost:7777');
 
         socket.onopen = function () {
             const sendMessageEvent = {
@@ -26,6 +26,7 @@ export class ChatModel {
 
         socket.onmessage = (event) => {
             const newMessage = event.data;
+            console.log(newMessage);
             this.newMessage = newMessage;
             return this.newMessage;
         };
