@@ -9,6 +9,10 @@ const WebSocket = require('ws');
 const app = express();
 const port = 7777;
 
+// app.get('/', (req, res) => {
+//   res.sendFile(`${__dirname}/dist/index.html`);
+// });
+
 const server = http.createServer(app);
 
 const wss = new WebSocket.Server({ server });
