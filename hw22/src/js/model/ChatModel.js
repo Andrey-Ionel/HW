@@ -26,7 +26,7 @@ export class ChatModel {
 
         socket.onmessage = (event) => {
             const newMessage = JSON.parse(event.data);
-            console.log(newMessage.payload);
+            console.log(newMessage.payload.message);
             this.newMessage = newMessage;
             return this.newMessage;
         };
