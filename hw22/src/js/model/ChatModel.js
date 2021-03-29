@@ -4,7 +4,7 @@
 /* eslint-disable import/prefer-default-export */
 export class ChatModel {
     constructor() {
-        this.$newMessage = this.newMessage;
+
     }
 
     async addChatData(message, author) {
@@ -27,8 +27,9 @@ export class ChatModel {
         socket.onmessage = (event) => {
             const newMessage = JSON.parse(event.data);
             console.log(newMessage.payload.message);
-            this.newMessage = newMessage;
-            return this.newMessage;
+            newMessage.payload.author = author;
+            newMessage.payload.message = message;
+            return { message, author };
         };
 
         socket.onerror = (event) => {

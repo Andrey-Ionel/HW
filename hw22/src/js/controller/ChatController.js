@@ -13,7 +13,9 @@ export class ChatController {
             addChatData: (message, author) => this.addChatData(message, author),
         });
 
-        this.chatModel = new ChatModel();
+        this.chatModel = new ChatModel({
+            addChatData: (message, author) => this.addChatData(message, author),
+        });
 
         $app.append(this.chatView.$viewChat);
     }
