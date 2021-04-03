@@ -16,7 +16,7 @@ export class GalleryController {
 
     constructor() {
         this.galleryView = new GalleryView();
-        this.albumsView = new AlbumsView({ showAlbumPhotos: (id) => this.showAlbumPhotos(id) });
+        this.albumsView = new AlbumsView({ showAlbumPhotos: (id: number) => this.showAlbumPhotos(id) });
         this.albumPhotosView = new AlbumPhotosView();
         this.albumsModel = new AlbumsModel();
         this.albumPhotosModel = new AlbumPhotosModel();
@@ -40,7 +40,7 @@ export class GalleryController {
         this.albumPhotosView.renderAlbumPhotos(albumPhotos);
     }
 
-    async showAlbumPhotos(id: number | string) {
+    async showAlbumPhotos(id: number) {
         const albumPhotos = await this.albumPhotosModel.sendGetAlbumPhotosRequest(id);
         this.albumPhotosView.renderAlbumPhotos(albumPhotos);
     }

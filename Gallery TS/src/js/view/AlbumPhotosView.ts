@@ -14,8 +14,8 @@ export class AlbumPhotosView {
     </div>`);
   }
 
-  renderAlbumPhotos(albumPhotos: any) {
+  renderAlbumPhotos(albumPhotos: any[]) {
     this.$albumPhotosContainer.html('');
-    albumPhotos.map((photo: any) => this.$albumPhotosContainer.append(`<img class="album-photo" src="${photo.thumbnailUrl}">`));
+    albumPhotos.map((photo: { thumbnailUrl: string; }) => this.$albumPhotosContainer.append(`<img class="album-photo" src="${photo.thumbnailUrl}">`));
   }
 }

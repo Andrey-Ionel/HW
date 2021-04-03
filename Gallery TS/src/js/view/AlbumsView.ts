@@ -4,9 +4,9 @@ import $ from 'jquery';
 
 export class AlbumsView {
   $albumListContainer: JQuery<HTMLElement>;
-  config: { showAlbumPhotos: (id: number | string) => Promise<void>; };
+  config: { showAlbumPhotos: (id: number) => Promise<void>; };
 
-  constructor(config: { showAlbumPhotos: ((id: number | string) => Promise<void>); }) {
+  constructor(config: { showAlbumPhotos: ((id: number) => Promise<void>); }) {
     this.config = config;
     this.$albumListContainer = this.generateAlbumListContainer();
     this.createAlbumListEventListener();
@@ -17,9 +17,9 @@ export class AlbumsView {
     </div>`);
   }
 
-  renderAlbumList(albums: any[]) {
+  renderAlbumList(albums: { id: number; title: string; }[]) {
     const $albumList = $('.js-album-list');
-    albums.map((list: { id: any; title: any; }) => $albumList.append(`<li class="album-list-item" id=${list.id}>${list.title}</li>`));
+    albums.map((list: { id: number; title: string; }) => $albumList.append(`<li class="album-list-item" id=${list.id}>${list.title}</li>`));
   }
 
   createAlbumListEventListener() {
@@ -28,7 +28,7 @@ export class AlbumsView {
 
   onClickAlbumList(event: JQuery.ClickEvent<HTMLElement, null, HTMLElement, HTMLElement>) {
     if (event.target.classList.contains('album-list-item')) {
-      const albumId = event.target.id;
+      const albumId = parseInt(event.target.id);
       this.config.showAlbumPhotos(albumId);
     }
   }

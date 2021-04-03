@@ -7,7 +7,7 @@ export class AlbumPhotosModel {
     this.photos = [];
   }
 
-  async sendGetAlbumPhotosRequest(albumId: number | string) {
+  async sendGetAlbumPhotosRequest(albumId: number) {
     return fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`)
       .then((response) => response.json())
       .then((photos) => this.photos = photos);
