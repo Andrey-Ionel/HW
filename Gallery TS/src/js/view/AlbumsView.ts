@@ -26,7 +26,7 @@ export class AlbumsView {
     this.$albumListContainer.click((event) => this.onClickAlbumList(event));
   }
 
-  onClickAlbumList(event: JQuery.ClickEvent<HTMLElement, null, HTMLElement, HTMLElement>) {
+  onClickAlbumList(event: JQuery.ClickEvent<HTMLElement>) {
     if (event.target.classList.contains('album-list-item')) {
       const albumId = parseInt(event.target.id);
       this.config.showAlbumPhotos(albumId);
