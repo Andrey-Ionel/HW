@@ -7,8 +7,8 @@
     "extends": [
         "plugin:react/recommended",
         "airbnb"
-        // // Базовый набор правил eslint
-        // "eslint:recommended",
+        // Базовый набор правил eslint
+        // "eslint:recommended"
         // // Отключаем правила из базового набора
         // "plugin:@typescript-eslint/eslint-recommended",
         // // Базовые правила для TypeScript
@@ -36,10 +36,7 @@
         "no-use-before-define": 0,
         "no-multi-assign": 0,
         "max-len": 0,
-        "max-classes-per-file": 0,
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-        "react/prop-types": "off"
+        "max-classes-per-file": 0
     },
     "settings": {
         "react": {

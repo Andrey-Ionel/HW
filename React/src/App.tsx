@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from '../components/button/Button';
-import { Form } from './form/Form'
+import { Form } from '../components/Form'
 import { Button as ButtonAntd } from 'antd';
-import { MenuApp } from './menu/menuApp';
-
+import { MenuApp } from '../components/Menu';
+import './style.scss'
 interface IAppProps {
 
 }
@@ -25,27 +25,29 @@ export class App extends React.PureComponent<IAppProps, IAppState> {
   }
 
   onToggleReactButton = () => { //стрелками решили проблему потери this
-    const { isReactButtonVisible } = this.state
+    const { isReactButtonVisible } = this.state;
     this.setState({
-      isReactButtonVisible: !isReactButtonVisible
+      isReactButtonVisible: !isReactButtonVisible,
     })
   }
 
   render() {
     const header = this.getHeader()
-    const { isReactButtonVisible } = this.state
+    const { isReactButtonVisible } = this.state;
     return (
       <>
-        <div>Hello!</div>
-        <h1>{header}</h1>
-        <Button>Cleck Me</Button>
-        <Button color='danger' onClick={this.onToggleReactButton}>Send</Button>
-        {
-          isReactButtonVisible && (<Button>React Button</Button>)
-        }
-        <Form />
-        <ButtonAntd>Default Button</ButtonAntd>
-        <MenuApp />
+        <div className='wrapper'>
+          <div>Hello!</div>
+          <h1>{header}</h1>
+          <Button>Cleck Me</Button>
+          <Button color='danger' onClick={this.onToggleReactButton}>Send</Button>
+          {
+            isReactButtonVisible && (<Button>React Button</Button>)
+          }
+          <Form />
+          <ButtonAntd>Default Button</ButtonAntd>
+          <MenuApp />
+        </div>
       </>
 
     );

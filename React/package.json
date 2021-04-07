@@ -6,7 +6,7 @@
     "build": "webpack --mode production",
     "start": "webpack serve --mode development",
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --ext .jsx,.js,.ts,.tsx src/ --fix"
   },
   "keywords": [],
   "author": "Ionel Andrey",
