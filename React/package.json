@@ -1,7 +1,7 @@
 {
   "name": "reactproject",
   "version": "1.0.0",
-  "main": "src/js/app.ts",
+  "main": "src/App.tsx",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack serve --mode development",
