@@ -1,0 +1,16 @@
+.ui-button {
+  padding: 5px 15px;
+  background: rgb(81, 214, 157);
+  color: aliceblue;
+  border: none;
+  border-radius: 3px;
+  margin: 5px;
+}
+
+.ui-button-color-primary {
+  background: rgb(108, 81, 214);
+}
+
+.ui-button-color-danger {
+  background: rgb(214, 81, 121);
+}

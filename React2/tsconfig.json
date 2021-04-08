@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es2015",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "declaration": true,
+    "esModuleInterop": true,
+  },
+  "include": [
+    "src/*",
+    "src/App.tsx",
+    "components/button/Button.tsx"
+  ],
+}
