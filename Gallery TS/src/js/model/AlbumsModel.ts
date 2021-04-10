@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-return-assign */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/prefer-default-export */
 export class AlbumsModel {
     albums: never[];
+
     constructor() {
         this.albums = [];
     }

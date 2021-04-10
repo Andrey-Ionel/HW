@@ -1,9 +1,12 @@
+/* eslint-disable radix */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable import/prefer-default-export */
 import $ from 'jquery';
 
 export class AlbumsView {
   $albumListContainer: JQuery<HTMLElement>;
+
   config: { showAlbumPhotos: (id: number) => Promise<void>; };
 
   constructor(config: { showAlbumPhotos: ((id: number) => Promise<void>); }) {

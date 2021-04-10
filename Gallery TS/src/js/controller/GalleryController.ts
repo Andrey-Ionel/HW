@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable lines-between-class-members */
 /* eslint-disable import/prefer-default-export */
 import $ from 'jquery';
 
