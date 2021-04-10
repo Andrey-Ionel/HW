@@ -25,15 +25,13 @@ export class App extends React.PureComponent<IAppProps, IAppState> {
   }
 
   onToggleReactButton = () => { //стрелками решили проблему потери this
-    const { isReactButtonVisible } = this.state;
-    this.setState({
-      isReactButtonVisible: !isReactButtonVisible,
-    })
+    const { isReactButtonVisible } = this.state
+    this.setState({ isReactButtonVisible: !isReactButtonVisible })
   }
 
   render() {
     const header = this.getHeader()
-    const { isReactButtonVisible } = this.state;
+    const { isReactButtonVisible } = this.state
     return (
       <>
         <div className='wrapper'>

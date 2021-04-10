@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form } from '../components/Form'
-import { TodoList } from './todoList/TodoList'
 import { TodoListConnected } from './redux/TodoListConnected'
 import { createStore } from 'redux'
 import { todosReduser } from './redux/todos-reduser'
@@ -16,9 +15,8 @@ const store = createStore(todosReduser)
 
 export const App: React.FunctionComponent<IAppProps> = () => {
 
-  const [isReactButtonVisible, setIsReactButtonVisible] = useState(false);
+  const [isReactButtonVisible] = useState(false);
 
-  const onToggleReactButton = useCallback(() => (setIsReactButtonVisible(!isReactButtonVisible)), [isReactButtonVisible])
 
   useEffect(() => {
     console.log('MOUNT');
